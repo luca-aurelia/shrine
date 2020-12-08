@@ -1,11 +1,27 @@
-const circleRenderer = {
-  render (options, element) {
+const Circle = {
+  defaultElementOptions: {
+    type: 'circle',
+    x: 0,
+    y: 0,
+    xRadius: 1,
+    yRadius: 1,
+    rotation: 0,
+    startAngle: 0,
+    endAngle: 2 * Math.PI,
+    fillStyle: 'pink'
+  },
+
+  make (options, shrine) {
+    return Object.assign({}, this.defaultElementOptions, options)
+  },
+
+  draw (options, element) {
     const { context } = options
 
     context.beginPath()
     context.arc(
-      element.point.x,
-      element.point.y,
+      element.x,
+      element.y,
       element.radius,
       element.startAngle,
       element.endAngle
@@ -13,8 +29,21 @@ const circleRenderer = {
   }
 }
 
-const pathRenderer = {
-  render (options, element) {
+const Path = {
+  defaultElementOptions: {
+    type: 'path',
+    points: [
+      { x: 0, y: 0 },
+      { x: 1, y: 1 }
+    ],
+    strokeStyle: 'pink'
+  },
+
+  make (options, shrine) {
+    return Object.assign({}, this.defaultElementOptions, options)
+  },
+
+  draw (options, element) {
     const { context } = options
 
     const start = element.points[0]
@@ -29,14 +58,30 @@ const pathRenderer = {
   }
 }
 
-const ellipseRenderer = {
-  render (options, element) {
+const Ellipse = {
+  defaultElementOptions: {
+    type: 'ellipse',
+    x: 0,
+    y: 0,
+    xRadius: 1,
+    yRadius: 1,
+    rotation: 0,
+    startAngle: 0,
+    endAngle: 2 * Math.PI,
+    fillStyle: 'pink'
+  },
+
+  make (options, shrine) {
+    return Object.assign({}, this.defaultElementOptions, options)
+  },
+
+  draw (options, element) {
     const { context } = options
 
     context.beginPath()
     context.ellipse(
-      element.point.x,
-      element.point.y,
+      element.x,
+      element.y,
       element.xRadius,
       element.yRadius,
       element.rotation,
@@ -46,10 +91,10 @@ const ellipseRenderer = {
   }
 }
 
-const defaultRenderers = {
-  circle: circleRenderer,
-  path: pathRenderer,
-  ellipse: ellipseRenderer
+const defaultElementTypes = {
+  circle: Circle,
+  path: Path,
+  ellipse: Ellipse
 }
 
 function applyDefaultOptions (canvas, options) {
@@ -58,7 +103,11 @@ function applyDefaultOptions (canvas, options) {
 
   const context = canvas.getContext('2d')
 
-  const renderers = Object.assign({}, defaultRenderers, options.renderers)
+  const elementTypes = Object.assign(
+    {},
+    defaultElementTypes,
+    options.elementTypes
+  )
 
   const defaultOptions = {
     canvas,
@@ -66,7 +115,7 @@ function applyDefaultOptions (canvas, options) {
     width,
     height,
     clearColor: 'white',
-    renderers
+    elementTypes
   }
 
   return Object.assign({}, defaultOptions, options)
@@ -85,12 +134,12 @@ export default class Shrine {
     this.options = applyDefaultOptions(canvas, options)
   }
 
-  renderElement (element) {
+  drawElement (element) {
     this.options.context.strokeStyle = element.strokeStyle
     this.options.context.fillStyle = element.fillStyle
 
-    const renderer = this.options.renderers[element.type]
-    renderer.render(this.options, element)
+    const elementType = this.options.elementTypes[element.type]
+    elementType.draw(this.options, element)
 
     if (element.strokeStyle) {
       this.options.context.stroke()
@@ -106,11 +155,11 @@ export default class Shrine {
     this.options.context.fillRect(0, 0, this.options.width, this.options.height)
   }
 
-  render (elements) {
+  draw (elements) {
     elements = makeSureIsArray(elements)
 
     for (let i = 0; i < elements.length; i++) {
-      this.renderElement(elements[i])
+      this.drawElement(elements[i])
     }
   }
 }
