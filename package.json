@@ -10,8 +10,8 @@
     "publish": "gh release create",
     "build": "yarn cleanDist && yarn compile && yarn copyModule",
     "cleanDist": "rm -r dist",
-    "compile": "babel source/index.js --out-file dist/index.cjs",
-    "copyModule": "cp source/index.js dist/index.mjs"
+    "compile": "babel source/index.js --out-file dist/index.common.js",
+    "copyModule": "cp source/index.js dist/index.module.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.8",
