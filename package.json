@@ -1,0 +1,14 @@
+{
+  "name": "y",
+  "version": "0.0.0",
+  "description": "A small library for declarative rendering.",
+  "main": "index.js",
+  "author": "C. Thomas Bailey (@noise_machines)",
+  "license": "MIT",
+  "scripts": {
+
+  },
+  "devDependencies": {
+    "standard": "^16.0.3"
+  }
+}
