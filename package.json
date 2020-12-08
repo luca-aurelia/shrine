@@ -6,7 +6,7 @@
   "author": "C. Thomas Bailey (@noise_machines)",
   "license": "MIT",
   "scripts": {
-    "publishPrerelease": "gh release create --prerelease",
+    "publishPrerelease": "gh release create --prerelease -- notes '' --title ''",
     "publish": "gh release create",
     "build": "sh scripts/build.sh"
   },
