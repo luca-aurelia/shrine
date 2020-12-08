@@ -6,8 +6,8 @@
   "author": "C. Thomas Bailey (@noise_machines)",
   "license": "MIT",
   "scripts": {
-    "publishPrerelease": "gh release create --prerelease",
-    "publish": "gh release create",
+    "publishPrerelease": "yarn build && gh release create --prerelease",
+    "publish": "yarn build && gh release create",
     "build": "yarn cleanDist && yarn compile && yarn copyModule",
     "cleanDist": "rm -r dist",
     "compile": "babel source/index.js --out-file dist/index.common.js",
