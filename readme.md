@@ -29,11 +29,11 @@ const shrine = new Shrine()
 // the future I might implement the ability
 // to use denormalized pixel values too.
 shrine.draw({
-	type: 'circle',
-	point: {
-		x: 0.5,
-		y: 0.5
-	},
-	fillStyle: 'pink'
+  type: 'circle',
+  point: {
+    x: 0.5,
+    y: 0.5
+  },
+  fillStyle: 'pink'
 })
 ```

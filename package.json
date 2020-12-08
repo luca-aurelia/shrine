@@ -1,14 +1,24 @@
 {
-  "name": "y",
+  "name": "shrine",
   "version": "0.0.0",
   "description": "A small library for declarative rendering.",
   "main": "index.js",
   "author": "C. Thomas Bailey (@noise_machines)",
   "license": "MIT",
   "scripts": {
-
+    "publishPrerelease": "gh release create --prerelease",
+    "publish": "gh release create",
+    "build": "yarn cleanDist && yarn compile && yarn copyModule",
+    "cleanDist": "rm -r dist",
+    "compile": "babel source/index.js --out-file dist/index.cjs",
+    "copyModule": "cp source/index.js dist/index.mjs"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.8",
+    "@babel/core": "^7.12.9",
     "standard": "^16.0.3"
+  },
+  "dependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.12.1"
   }
 }
