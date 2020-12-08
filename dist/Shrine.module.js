@@ -96,12 +96,14 @@ const defaultElementTypes = {
 }
 
 function applyDefaultOptions (canvas, options) {
+  options = { ...options }
+
   const width = canvas.width / window.devicePixelRatio
   const height = canvas.height / window.devicePixelRatio
 
   const context = canvas.getContext('2d')
 
-  const elementTypes = Object.assign(
+  options.elementTypes = Object.assign(
     {},
     defaultElementTypes,
     options.elementTypes
