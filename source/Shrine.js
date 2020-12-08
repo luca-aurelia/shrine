@@ -3,9 +3,7 @@ const Circle = {
     type: 'circle',
     x: 0,
     y: 0,
-    xRadius: 1,
-    yRadius: 1,
-    rotation: 0,
+    radius: 1,
     startAngle: 0,
     endAngle: 2 * Math.PI,
     fillStyle: 'pink'
