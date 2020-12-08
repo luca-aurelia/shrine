@@ -72,7 +72,7 @@
       clearColor: 'white',
       renderers
     };
-    Object.assign({}, defaultOptions, options);
+    return Object.assign({}, defaultOptions, options);
   }
 
   function makeSureIsArray(x) {
