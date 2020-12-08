@@ -132,6 +132,11 @@ export default class Shrine {
     this.options = applyDefaultOptions(canvas, options)
   }
 
+  make (elementTypeName, elementOptions) {
+    const elementType = this.options.elementTypes[elementTypeName]
+    return elementType.make(elementOptions, this)
+  }
+
   drawElement (element) {
     this.options.context.strokeStyle = element.strokeStyle
     this.options.context.fillStyle = element.fillStyle
