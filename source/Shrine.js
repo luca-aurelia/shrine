@@ -114,8 +114,7 @@ function applyDefaultOptions (canvas, options) {
     context,
     width,
     height,
-    clearColor: 'white',
-    elementTypes
+    clearColor: 'white'
   }
 
   return Object.assign({}, defaultOptions, options)
