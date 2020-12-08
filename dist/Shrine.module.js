@@ -9,12 +9,12 @@ const Circle = {
     fillStyle: 'pink'
   },
 
-  make (options, shrine) {
-    return Object.assign({}, this.defaultElementOptions, options)
+  make (shrine, element) {
+    return Object.assign({}, this.defaultElementOptions, element)
   },
 
-  draw (options, element) {
-    const { context } = options
+  draw (shrine, element) {
+    const { context } = shrine.options
 
     context.beginPath()
     context.arc(
@@ -37,12 +37,12 @@ const Path = {
     strokeStyle: 'pink'
   },
 
-  make (options, shrine) {
-    return Object.assign({}, this.defaultElementOptions, options)
+  make (shrine, element) {
+    return Object.assign({}, this.defaultElementOptions, element)
   },
 
-  draw (options, element) {
-    const { context } = options
+  draw (shrine, element) {
+    const { context } = shrine.options
 
     const start = element.points[0]
 
@@ -69,12 +69,12 @@ const Ellipse = {
     fillStyle: 'pink'
   },
 
-  make (options, shrine) {
-    return Object.assign({}, this.defaultElementOptions, options)
+  make (shrine, element) {
+    return Object.assign({}, this.defaultElementOptions, element)
   },
 
-  draw (options, element) {
-    const { context } = options
+  draw (shrine, element) {
+    const { context } = shrine.options
 
     context.beginPath()
     context.ellipse(
@@ -134,7 +134,7 @@ export default class Shrine {
 
   make (elementTypeName, elementOptions) {
     const elementType = this.options.elementTypes[elementTypeName]
-    return elementType.make(elementOptions, this)
+    return elementType.make(this, elementOptions)
   }
 
   drawElement (element) {
@@ -142,7 +142,7 @@ export default class Shrine {
     this.options.context.fillStyle = element.fillStyle
 
     const elementType = this.options.elementTypes[element.type]
-    elementType.draw(this.options, element)
+    elementType.draw(this, element)
 
     if (element.strokeStyle) {
       this.options.context.stroke()

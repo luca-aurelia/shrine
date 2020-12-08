@@ -28,14 +28,14 @@
       fillStyle: 'pink'
     },
 
-    make(options, shrine) {
-      return Object.assign({}, this.defaultElementOptions, options);
+    make(shrine, element) {
+      return Object.assign({}, this.defaultElementOptions, element);
     },
 
-    draw(options, element) {
+    draw(shrine, element) {
       const {
         context
-      } = options;
+      } = shrine.options;
       context.beginPath();
       context.arc(element.x, element.y, element.radius, element.startAngle, element.endAngle);
     }
@@ -54,14 +54,14 @@
       strokeStyle: 'pink'
     },
 
-    make(options, shrine) {
-      return Object.assign({}, this.defaultElementOptions, options);
+    make(shrine, element) {
+      return Object.assign({}, this.defaultElementOptions, element);
     },
 
-    draw(options, element) {
+    draw(shrine, element) {
       const {
         context
-      } = options;
+      } = shrine.options;
       const start = element.points[0];
       context.beginPath();
       context.moveTo(start.x, start.y);
@@ -86,14 +86,14 @@
       fillStyle: 'pink'
     },
 
-    make(options, shrine) {
-      return Object.assign({}, this.defaultElementOptions, options);
+    make(shrine, element) {
+      return Object.assign({}, this.defaultElementOptions, element);
     },
 
-    draw(options, element) {
+    draw(shrine, element) {
       const {
         context
-      } = options;
+      } = shrine.options;
       context.beginPath();
       context.ellipse(element.x, element.y, element.xRadius, element.yRadius, element.rotation, element.startAngle, element.endAngle);
     }
@@ -136,14 +136,14 @@
 
     make(elementTypeName, elementOptions) {
       const elementType = this.options.elementTypes[elementTypeName];
-      return elementType.make(elementOptions, this);
+      return elementType.make(this, elementOptions);
     }
 
     drawElement(element) {
       this.options.context.strokeStyle = element.strokeStyle;
       this.options.context.fillStyle = element.fillStyle;
       const elementType = this.options.elementTypes[element.type];
-      elementType.draw(this.options, element);
+      elementType.draw(this, element);
 
       if (element.strokeStyle) {
         this.options.context.stroke();
