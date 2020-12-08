@@ -2,7 +2,6 @@
   "name": "shrine",
   "version": "0.0.0",
   "description": "A small library for declarative rendering.",
-  "main": "index.js",
   "author": "C. Thomas Bailey (@noise_machines)",
   "license": "MIT",
   "scripts": {
@@ -10,6 +9,9 @@
     "publish": "gh release create",
     "build": "sh scripts/build.sh"
   },
+  "main": "dist/Shrine.module.js",
+  "browser": "dist/Shrine.umd.js",
+  "module": "dist/Shrine.module.js",
   "devDependencies": {
     "@babel/cli": "^7.12.8",
     "@babel/core": "^7.12.9",
